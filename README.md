@@ -6,3 +6,5 @@ A propos du jeu, concernant le menu les personnages présents ne peuvent etre ch
 Pour pouvoir tirer les missiles, il faut appuyer sur la touche Z du clavier
 Pour sauter appuyer sur la touche espace
 "game over"si le personnage se prend un obsctacle, il se fait electrocuter juste avant
+
+Pour lancer le jeu, vous pouvez aller directement au niveau du terminal et taper python main.py
