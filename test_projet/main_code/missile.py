@@ -4,7 +4,9 @@ import pygame
 class Missile(pygame.sprite.Sprite):
     def __init__(self, x, y, speed):
         super().__init__()
-        self.image = MISSILE_IMAGE
+        self.image = pygame.image.load("image/missile2.png")
+        self.image = pygame.transform.scale(self.image, (30, 15))
+
         self.rect = self.image.get_rect()
         self.rect.centerx = x
         self.rect.centery = y

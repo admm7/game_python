@@ -3,9 +3,27 @@ import sys
 import random
 import time
 import menu as menu
+from missile import Missile
+
+
+
+
+CHARACTER1 = pygame.image.load("image/charachter1.png")
+CHARACTER1 = pygame.transform.scale(CHARACTER1, (100, 100))
+CHARACTER2 = pygame.image.load("image/charachter2.png")
+CHARACTER2 = pygame.transform.scale(CHARACTER2, (100, 100))
+CHARACTER3 = pygame.image.load("image/charachter3.png")
+CHARACTER3 = pygame.transform.scale(CHARACTER3, (100, 100))
+
+ELECTROCUTED_IMAGE = pygame.image.load("image/electrocuted.png")
+ELECTROCUTED_IMAGE = pygame.transform.scale(ELECTROCUTED_IMAGE, (80, 80))
+PLAYER_AFTER_ELECTROCUTED = pygame.image.load("image/charachter1.png")
+PLAYER_AFTER_ELECTROCUTED = pygame.transform.scale(PLAYER_AFTER_ELECTROCUTED, (80, 80))
+
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, selected_character="image/player.png"):
+    def __init__(self, CHARACTER3, ELECTROCUTED_IMAGE,\
+                  PLAYER_AFTER_ELECTROCUTED, screen_height, selected_character="image/player.png"):
         super().__init__()
         self.selected_character = selected_character
         self.images = [CHARACTER3, ELECTROCUTED_IMAGE, PLAYER_AFTER_ELECTROCUTED]
@@ -13,7 +31,8 @@ class Player(pygame.sprite.Sprite):
         self.image = self.images[self.index]
         self.rect = self.image.get_rect()
         self.rect.centerx = 100
-        self.rect.centery = SCREEN_HEIGHT // 2
+        self.rect.centery = screen_height // 2
+        self.screen_height = screen_height
         self.gravity = 1
         self.score = 0
         self.attack_cooldown = 0
@@ -24,7 +43,7 @@ class Player(pygame.sprite.Sprite):
 
 
 
-    def update(self):
+    def update(self, Missile, missiles, all_sprites, MISSILE_SOUND):
         if not self.electrocuted:
             keys = pygame.key.get_pressed()
             if keys[pygame.K_SPACE]:
@@ -56,8 +75,8 @@ class Player(pygame.sprite.Sprite):
                 self.image = PLAYER_AFTER_ELECTROCUTED
 
         # Ajout des vérifications pour empêcher le joueur de sortir de l'écran verticalement
-        if self.rect.bottom > SCREEN_HEIGHT:
-            self.rect.bottom = SCREEN_HEIGHT
+        if self.rect.bottom > self.screen_height:
+            self.rect.bottom = self.screen_height
             self.velocity_y = 0
         elif self.rect.top < 0:
             self.rect.top = 0

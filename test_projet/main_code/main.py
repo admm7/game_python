@@ -52,14 +52,12 @@ CHARACTER3 = pygame.image.load("image/charachter3.png")
 CHARACTER3 = pygame.transform.scale(CHARACTER3, (100, 100))
 PLAYER_IMAGE = pygame.image.load("image/transformation.png")
 PLAYER_IMAGE = pygame.transform.scale(PLAYER_IMAGE, (100, 100))
-MISSILE_IMAGE = pygame.image.load("image/missile2.png")
-MISSILE_IMAGE = pygame.transform.scale(MISSILE_IMAGE, (30, 15))
+
 ROCKET_WARNING_IMAGE = pygame.image.load("image/avert.png")
 ROCKET_WARNING_IMAGE = pygame.transform.scale(ROCKET_WARNING_IMAGE, (30, 30))
 ROCKET_IMAGE = pygame.image.load("image/rocket.png")
 ROCKET_IMAGE = pygame.transform.scale(ROCKET_IMAGE, (50, 20))
-LASER_IMAGE = pygame.image.load("image/zap.png")
-LASER_IMAGE = pygame.transform.scale(LASER_IMAGE, (50, 120))
+
 ELECTROCUTED_IMAGE = pygame.image.load("image/electrocuted.png")
 ELECTROCUTED_IMAGE = pygame.transform.scale(ELECTROCUTED_IMAGE, (80, 80))
 PLAYER_AFTER_ELECTROCUTED = pygame.image.load("image/charachter1.png")
@@ -74,22 +72,6 @@ MISSILE_SOUND = pygame.mixer.Sound("sound/explosion.mp3")
 COIN_IMAGE_PATH = "image/coineeee.png"
 COIN_IMAGE = pygame.image.load(COIN_IMAGE_PATH).convert_alpha()
 COIN_IMAGE = pygame.transform.scale(COIN_IMAGE, (60, 60))
-
-
-            
-
-
-
-
-
- 
-
-
-
-
-
-
-
 
 clock = pygame.time.Clock()
 
@@ -106,7 +88,7 @@ enemy_missiles = pygame.sprite.Group()
 
 # Groupe de sprites
 all_sprites = pygame.sprite.Group()
-player = Player()
+player = Player(CHARACTER3, ELECTROCUTED_IMAGE, PLAYER_AFTER_ELECTROCUTED, SCREEN_HEIGHT)
 all_sprites.add(player)
 
 # Groupe de missiles
@@ -188,7 +170,7 @@ while running:
                 running = False
 
     # Mise à jour des sprites
-    all_sprites.update()
+    all_sprites.update(Missile, missiles, all_sprites, MISSILE_SOUND)
 
     # Si 10 secondes se sont écoulées, changez le fond
     if elapsed_time >= 10:

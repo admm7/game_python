@@ -5,9 +5,10 @@ import time
 import menu as menu
 
 class Laser(pygame.sprite.Sprite):
-    def __init__(self, x, y, speed):
+    def __init__(self, x, y, speed, ):
         super().__init__()
-        self.image = LASER_IMAGE
+        self.image = pygame.image.load("image/zap.png")
+        self.image = pygame.transform.scale(self.image, (50, 120))
         self.rect = self.image.get_rect()
         self.rect.centerx = x
         self.rect.centery = y
